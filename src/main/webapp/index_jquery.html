@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="js/jquery/jquery-2.1.4.js"></script>
+<script>
+
+$(document).ready( function ( ) {
+	
+	$("#btn").click ( function () {
+		
+		$("#mensagem").load("cli.do");
+		
+	}) ;
+	
+}) ;
+
+</script>
+
+</head>
+<body>
+
+<input type="button" id="btn" value="Request Ajax">
+
+<div id="mensagem">
+
+</div>
+
+</body>
+</html>
