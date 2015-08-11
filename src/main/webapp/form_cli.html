@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="js/jquery/jquery-2.1.4.js"></script>
+
+
+<script>
+
+$(document).ready( function ( ) {
+	
+
+	$("#btnSalvar").click(function(){
+	    $.post("cli.do",
+	    {
+	        nome: $("#nome").val(),
+	        email: $("#email").val()
+	    },
+	    function(data, status){
+	        alert("Salvo com sucesso! ");
+	        $("#divClientes").html(data);
+	    });
+	});
+	
+
+	
+	$("#btnListar").click(function(){
+	    $.get("cli.do",
+	    function(data, status){
+	        $("#divClientes").html(data);
+	    });
+	});
+	
+
+
+});
+</script>
+
+</head>
+<body>
+
+<form id="frmcli">
+
+	Nome: <input type="text" id="nome">
+	E-mail: <input type="text" id="email">
+	
+	<input type="button"  id="btnSalvar"  value="Salvar" />
+	<input type="button"  id="btnListar"  value="Listar" />
+	
+</form>
+
+
+<div id="divClientes">
+
+
+</div>
+
+</body>
+</html>
