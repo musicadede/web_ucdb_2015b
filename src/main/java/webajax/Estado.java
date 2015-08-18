@@ -28,7 +28,11 @@ public class Estado {
         this.nome = nome;
     }
 
-
+	@Override
+	public String toString() {
+		System.out.println("A");
+		return "[uf=" + uf+ ", nome=" + nome+"]";
+}
 
 
 }
