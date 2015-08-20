@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -9,7 +8,7 @@
 
 <script>
 
-$(document).ready( function ( ) {
+$(document).ready( function () {
 
 
     $.ajax({
@@ -41,37 +40,69 @@ $(document).ready( function ( ) {
 					 					"<td>Login</td>"+
 					 					"<td>senha</td>"+
 					 					"<td>Estado</td>"+
+					 					"<td>Excluir</td>"+
 					 				"</tr>";
-				 				
+				 				i = 1;
 						$.each(json, function(key, value ){
-			                tabela +=  "<tr><td>" + value.nome + "</td><td>" + value.login+ "</td><td>" + value.senha + "</td><td>" + value.estado + "</td></tr>";
+			                tabela +=  "<tr><td>" + value.nome + "</td>"
+			                +"<td>"+ value.login+ "</td>"
+			                +"<td>"+ value.senha + "</td>"
+			                +"<td>"+ value.estado+ "</td>"
+			                +"<td><input type='button' onclick='exclui("+i+")' value='Excluir'/></td></tr>";
+			               i++;
 						});
 				 tabela+="</table>";
 					 $("#tab").html(tabela);
-	            },"json")
+	            },"json");
 	});
 
 });
+function exclui(i){
+	    $.ajax({
+	        type: "GET",
+	        url: 'cli.do?acao=excluir&nome='+i,
+	        dataType: "json",
+	        success:  function(json){var tabela = "<table border='1px'>"+
+										 				" <tr>"+
+															"<td>Nome</td>"+
+															"<td>Login</td>"+
+															"<td>senha</td>"+
+															"<td>Estado</td>"+
+															"<td>E</td>"
+														"</tr>";
+			
+				$.each(json, function(key, value ){
+					    tabela +=  "<tr><td>" + value.nome + "</td><td>" 
+					    + value.login+ "</td><td>" 
+					    + value.senha 
+					    + "</td><td><input type='button' onclick='exclui("+value.nome+")' value=Excluir id = exclui/></td></tr>";
+					   
+					})
+					tabela+="</table>";
+					$("#tab").html(tabela);
+					}
+	        }); 
+	        
+	        
+};
+
 </script>
 
 </head>
 <body>
+	<!-- ponto -->
+	<form id="formcli">
 
-<form id="formcli">
+		Nome: <input type="text" id="nome"><br /> <br /> Login: <input
+			type="text" id="login"><br /> <br /> Senha: <input
+			type="text" id="senha"><br /> <br /> Estado : <select
+			id="estado" name="estado"></select><br /> <br /> <input
+			type="button" id="btnSalvar" value="Salvar" /><br /> <br />
 
-	Nome: <input type="text" id="nome"><br/><br/>
-	Login: <input type="text" id="login"><br/><br/>
-	Senha: <input type="text" id="senha"><br/><br/>
-	Estado : <select id="estado" name="estado"></select><br/><br/>
-	<input type="button"  id="btnSalvar"  value="Salvar" /><br/><br/>
-	
-	<div id="tab">
-	
-	
-	</div>
-	
-	
-</form>
+		<div id="tab"></div>
+
+
+	</form>
 
 
 

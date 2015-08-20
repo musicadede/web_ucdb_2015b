@@ -15,34 +15,44 @@ import org.codehaus.jackson.map.ObjectMapper;
 @WebServlet("/cli.do")
 public class ClienteController extends HttpServlet {
 
-	
 	private static List<Cliente> lista = new ArrayList<>();
 	private static Integer id = 1;
-	
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		System.out.println("B");
 		
-		resp.getWriter().print( lista.toString()) ;
+		String acao = req.getParameter("acao");
+		String id = req.getParameter("nome");
+		System.out.println(id);
+		if (acao.equals("excluir")) {
+			lista.remove(Integer.parseInt(id)-1);
+		
+			
+		}
+		ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(lista);
+
+        resp.getWriter().print(json);
+		 
 	}
-	
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		String nome = req.getParameter("nome");
-		String login= req.getParameter("login");
-		String senha= req.getParameter("senha");
-		String estado= req.getParameter("estado");
-		
-		Cliente cliente = new Cliente(nome, login ,senha, estado);
+		String login = req.getParameter("login");
+		String senha = req.getParameter("senha");
+		String estado = req.getParameter("estado");
+
+		Cliente cliente = new Cliente(nome, login, senha, estado);
 		lista.add(cliente);
 		ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(lista);
-		
+		String json = mapper.writeValueAsString(lista);
+
 		resp.getWriter().print(json);
 	}
 }

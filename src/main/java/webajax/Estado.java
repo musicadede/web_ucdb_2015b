@@ -30,7 +30,7 @@ public class Estado {
 
 	@Override
 	public String toString() {
-		System.out.println("A");
+//		System.out.println("A");
 		return "[uf=" + uf+ ", nome=" + nome+"]";
 }
 

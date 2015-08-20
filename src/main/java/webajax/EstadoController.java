@@ -24,7 +24,7 @@ public class EstadoController extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(estados);
 
-        System.out.println("entrei aki");
+        
         resp.getWriter().print(json);
     }
 }

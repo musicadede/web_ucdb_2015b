@@ -8,7 +8,6 @@ public class Cliente {
 	private String estado;
 	
 	public Cliente(String nome, String login, String senha, String estado) {
-		super();
 		this.nome = nome;
 		this.login= login;
 		this.senha= senha;
