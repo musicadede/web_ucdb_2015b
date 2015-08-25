@@ -48,7 +48,9 @@ $(document).ready( function () {
 			                +"<td>"+ value.login+ "</td>"
 			                +"<td>"+ value.senha + "</td>"
 			                +"<td>"+ value.estado+ "</td>"
-			                +"<td><input type='button' onclick='exclui("+i+")' value='Excluir'/></td></tr>";
+			                +"<td><input type='button' onclick='exclui("+i+")' value='Excluir'/></td>"+
+			                "<td><input type='button' onclick='editar("+i+")' value='Editar'/></td>"+
+			                "</tr>";
 			               i++;
 						});
 				 tabela+="</table>";
@@ -70,13 +72,15 @@ function exclui(i){
 															"<td>Estado</td>"+
 															"<td>E</td>"
 														"</tr>";
-			
+				i = 1;
 				$.each(json, function(key, value ){
-					    tabela +=  "<tr><td>" + value.nome + "</td><td>" 
-					    + value.login+ "</td><td>" 
+					    tabela +=  "<tr><td>" + value.nome + "</td>"+
+					    				"<td>"+ value.login+ "</td>
+					    				"<td>" 
 					    + value.senha 
-					    + "</td><td><input type='button' onclick='exclui("+value.nome+")' value=Excluir id = exclui/></td></tr>";
-					   
+					    + "</td>"+
+					    "<td><input type='button' onclick='exclui("+i+")' value=Excluir id = exclui/></td></tr>";
+					   i++;
 					})
 					tabela+="</table>";
 					$("#tab").html(tabela);
@@ -85,6 +89,41 @@ function exclui(i){
 	        
 	        
 };
+
+function editar(i){
+    $.ajax({
+        type: "GET",
+        url: 'cli.do?acao=excluir&nome='+i,
+        dataType: "json",
+        success:  function(json){var tabela = "<table border='1px'>"+
+									 				" <tr>"+
+														"<td>Nome</td>"+
+														"<td>Login</td>"+
+														"<td>senha</td>"+
+														"<td>Estado</td>"+
+														"<td>E</td>"
+													"</tr>";
+			i = 1;
+			$.each(json, function(key, value ){
+				    tabela +=  "<tr><td>" + value.nome + "</td>"+
+				    				"<td>"+ value.login+ "</td>
+				    				"<td>" 
+				    + value.senha 
+				    + "</td>"+
+				    "<td><input type='button' onclick='exclui("+i+")' value=Excluir id = exclui/></td>"+
+				    "<td><input type='button' onclick='editar("+i+")' value=Editar id = editar/></td>"+
+				    "</tr>"
+				   i++;
+				})
+				tabela+="</table>";
+				$("#tab").html(tabela);
+				}
+        }); 
+        
+        
+};
+
+
 
 </script>
 
